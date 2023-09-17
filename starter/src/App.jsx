@@ -15,11 +15,27 @@ const App = () => {
     setItems((items) => items.filter((item) => item.id !== id));
   };
 
+  const handleToggleItem = (id) => {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              packed: !item.packed,
+            }
+          : item
+      )
+    );
+  };
   return (
     <div className="app">
       <Head />
       <Form onAddItem={handleAddItem} />
-      <ItemList items={items} onDeleteItem={handleDeleteItem} />
+      <ItemList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onToggleItems={handleToggleItem}
+      />
       <Stats />
     </div>
   );
